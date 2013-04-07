@@ -31,29 +31,48 @@
 % \cdate{\the\year 年\the\month 月 \the\day 日} % 此日期显示格式为阿拉伯数字 如2012年4月25日
 \cabstract{
 随着计算机技术的不断发展，各类大数据量的计算要求不断浮现，越来越多的学科领域，如生物，气象，
-医疗,基因测序比对等领域开始使用计算机和数值模拟的方法来解决科学和工程实践中遇到的各种问题，社会需求对
-计算机的性能提出了重要的要求. 这些需求具有大计算量，时间周期要求短，交换量大等特点．尽管单台计算机能够
+医疗,基因测序比对等领域开始使用计算机和数值模拟的方法来解决科学和工程实践中遇到的各种问题。总的来说，社会需求对
+计算机的性能提出了重要的要求。这些需求具有大计算量，时间周期要求短，交换量大等特点．尽管单台计算机能够
 满足日常使用，具有不错的性能和可靠性，但是例如云计算，大量卫星云图计算的大计算量对计算机性能提出了
-为重要的要求.通过并行计算的技术，可以实现多台单机构成计算群的方式来提供大量计算能力，用多台计算机模拟和
-实现计算性能更为强大的计算机,满足高性能计算需求.
+为重要的要求。通过并行计算的技术，可以实现多台单机构成计算群的方式来提供大量计算能力，用多台计算机模拟和
+实现计算性能更为强大的计算机,满足高性能计算需求。 
 
-    本课题着重研究了MPI在计算机并行计算技术中的应用，分析和实现了MPI并行计算模型.MPI实现
-消息传递编程的标准，具有实现灵活，可移植性强，性能高等特点．MPI以语言独立的方式定义了库
-接口，提供了c/c++等多种语言的绑定，是目前最高效率，非常流行的并行计算平台．
+   本课题着重研究了MPI在计算机并行计算技术中的应用，分析和实现了MPI并行计算模型在随机算法中的实现。M
+PI是消息传递编程的标准，具有实现灵活，可移植性强，性能高等特点。MPI以语言独立的方式定义了库
+接口，提供了C/C++等多种语言的绑定，是目前最高效率，非常流行的并行计算平台。
 
-    本文首先对并行计算进行讨论，阐述了并行计算体系结构，常用并行计算机，并行编程理论和并行算法．然后
-介绍了消息传递编程标准的MPI,构建了MPI运行环境，研究和实现了多个随机性常用算法，通过实现将多个单机程序
-进行并行化的方法，介绍了MPI的详细应用，在Linux服务器运行了MPI程序，统计了程序运行时间，得出MPI运行效率，
-证明了并行计算的高效，实现了单机程序到并行程序的转换.
+   本文首先对并行计算进行讨论，阐述了并行计算体系结构，常用并行计算机，并行编程理论和并行算法．然后
+介绍了消息传递编程标准的MPI,构建了MPI运行环境，研究和实现了多个随机性常用算法，通过实现将多个随机算法的单机版本
+进行并行化的方法，介绍了MPI的详细应用，在Linux服务器运行了MPI程序，统计和分析了程序运行时间，得出MPI运行效率，
+证明了并行计算的高效，实现了单机程序到并行程序的转换。
 }
 
 \ckeywords{[并行计算]  [MPI]  [常用算法] [并行化] }
 
 \eabstract{
+    With the development of computer technology,the demand of computing large set data becomes a serious problem.More and 
+more domain of science ,such as biology ,meteorology,medical,DNA sequencing,are requring using computers and numerical simulation
+method to resolve problems met in the science fileds and egineering.In general ,the stong requriment has push an heavy 
+pressureon the computers' capability.These requirements and needs have large set data to be computed and use shorter time,
+the exchangment bewteen the data are also very large.While single computer can deal with daily use,sharing the good capa
+and reliablity,it doesn't satisfiy the requirment of cloud computing and large statilite cloud picture.In order to meet the
+needs,proving the more powerful technolgy---parrallel computing ,using many single computers to form the computing cluster
+,to provide computing capability to compute mass data and satisfy the high computing performance's need.
 
+    In this article,analysis the apply of MPI in the parallel computing technology,analysis and fullfill the implement of
+random algorithms using MPI.MPI is the standard of message passing programming,it takes the advantage of nice transplatation,
+high computing capability,flexible implement.MPI is independent of specific language,defining the library API and binding
+of C/C++ program language.Now MPI is the most efficient and popular parallel computing platform.
+
+    Giving the discussion of parallel computing,introduce the structure of parallel computing system,most used parallel computer
+and theory of parallel computing and parallel alogrithm.Then,bring the short introduction of MPI,build up the MPI's running 
+environment,fulfill serveral common alogrithms. By implementing the parallel computing for these algorithms,running the 
+MPI programming,count up and analysis the program running time,calculating the MPI running efficiency,proving the high
+performance of parallel computing.
+    
 }
 
-\ekeywords{"parallel computing" , "MPI" , "alogrithm" , "parallelize" }
+\ekeywords{"Parallel computing" , "MPI" , "Random alogrithm" , "Parallelize" }
 
 \makecover
 
