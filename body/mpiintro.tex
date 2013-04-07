@@ -42,26 +42,19 @@ MPI终极目的是服务于进程间通讯的这一个目的。
 义，这将在大范围计算机上可有效实现，这也是MPI产生的重要原因。
 \end{enumerate}
 
-\textbf{???} 在MPI上很容易移植其它的并行代码，而且编程者不需要去努力掌握许多其它的全新概念就可以学习编写MPI程序，当然这并不意味着MPI已经十分完美，必须承认MPI自身还存在着一些缺点。
+在MPI上很容易移植其它的并行代码，而且编程者不需要去努力掌握许多其它的全新概念就可以学习编写MPI程序，当然这并不意味着MPI已经十分完美，必须承认MPI自身还存在着一些缺点。
 
 \subsection{MPI目标}
 MPI最终目标是实现并行计算的可并行性，总结讲为：高效地进程通信，优秀的程序可移植性，强大的函数功能,具体来所可以包涵以下几个方面
 
 \begin{enumerate}
 \item 提供应用程序编程接口。
-
 \item 提高通信效率。措施包括避免存储器到存储器的多次重复拷贝，允许计算和通信的重叠等。
-
 \item 可在异构环境下提供实现。
-
 \item 提供的接口可以方便 C ，C++语言和 Fortran 77的调用。
-
 \item 提供可靠的通信接口。即用户不必处理通信失败。
-
 \item 定义的接口和现在已有接口（如PVM NX Express p4）等差别不能太大，但是允许扩展以提供更大的灵活性。
-
 \item 定义的接口能在基本的通信和系统软件无重大改变时，在许多并行计算机生产商的平台上实现。接口的语义是独立于语言的。
-
 \item 接口设计应是线程安全的。
 \end{enumerate}
 
@@ -83,7 +76,7 @@ MPI 库作为可移植的消息传递函数库，具有以下一些特点：
 
 \section{MPI函数库介绍}
    并行程序编程的本质是对并行函数的调用，MPI2中具有众多的调用接口，理论上MPI所有的通信功能都可以
-用６个基本的调用来实现，接下来则分别介绍各个MPI调用
+用6个基本的调用来实现，接下来则分别介绍各个MPI调用
 
 \subsection{MPI\_Init()}
     MPI\_Init用来初始化MPI执行环境，建立多个MPI进程之间的联系，为后续的进程通信进行准备，对应会有
@@ -106,7 +99,7 @@ MPI\_Finalize则为结束MPI环境的调用，通常需要程序在此两个函�
 \subsection{MPI\_Finalize()}
     MPI\_Finalize 用来结束MPI执行环境，通常作为MPI程序的最后一条可执行程序语句．
 
-MPI有6种状态，分别是标准，同步，就绪，缓存，阻塞和非阻塞状态
+MPI有6种状态，分别是标准，同步，就绪，缓存，阻塞和非阻塞状态。
 
 \section{MPI通信模式}
     MPI提供两种消息传递函数，分别为点对点通信模式，组通信模式.
@@ -121,7 +114,7 @@ MPI有6种状态，分别是标准，同步，就绪，缓存，阻塞和非阻�
     \end{itemize} 
     
     MPI所有的进程通信需要属于某个特定的通信域．进程组是所有参加通信的进程的组合，内部的进程编号
-从０开始，然后依据自然数依次增加．MPI系统初始化后，会默认提供一个通信域MPI\_COMM\_WORLD，
+从0开始，然后依据自然数依次增加．MPI系统初始化后，会默认提供一个通信域MPI\_COMM\_WORLD，
 ，系统初始化所获取的所有进程的信息会存放于此通信域中，所有进程会获取属于自己独特的进程编号
 
 
@@ -142,16 +135,51 @@ MPI有6种状态，分别是标准，同步，就绪，缓存，阻塞和非阻�
     \vspace{\baselineskip}
     \end{figure}
 
-\section{MPI编程环境}
-    MPI做为标准，有多种版本的实现，本文和实验都是通过MPICH２来做展开和实验的.MPICH2是Argonne National Laboratory编写和维护的实现MPI标准的库,MPI由三层架构构成，分别为MPI的API，由点到点通信
-和在点刀点通信基础上构造的;中间为抽象设备层，用来封装不同的底层通信库的不同接口;底层是具体的
-底层通信库.
-\subsection{MPI环境搭建}
-    
-    本文使用MPICH2搭建和进行实验.
+\section{MPI编程环境搭建}
+     MPI做为消息传递标准，有多种版本的实现，本文和实验都是通过MPICH2来做展开和实验的。MPICH2是Argonne National Laboratory
+编写和维护的实现MPI标准的库,MPI由三层架构构成，分别为MPI的API，由点到点通信
+和在点到点通信基础上构造的;中间为抽象设备层，用来封装不同的底层通信库的不同接口;底层是具体的底层通信库。MPICH2在保证高性能的
+的同时保持了高度的可移植性，支持包括AIX,Linux(IA32，X86\_64),Mac OS/X,Solaris,Windows等多种操作系统平台，同时也做为一个开放
+开源的项目。
 
+    本文全部项目采用使用MPICH2作为环境进行实验。以下为系统搭建过程：
+
+    首先准备好系统和网络环境，本文的实验环境为局域网，内有3台装有64位Ubuntu12.04的PC机，CPU为i5-3300,内存为4G，三台机器的
+主机名分别为$S1,S2,S3$,其中$S1$作为Server,$S2,S3$作为Worker，PC机上已经装好了Python2.7,SSH,NFS。
+
+\subsection{配置SSH}    
+    MPICH2管理分布式计算环境中的各个进程，采用的都是SSH协议，为了方便管理，需要在$S1$上拷贝主机的ssh公钥到$S2,S3$上。 执行
+命令：
+    \begin{verbatim}
+    ssh-keygen -t rsa
+    ssh-copy-id -i ~/.ssh/id_rsa.pub root@S2
+    ssh-copy-id -i ~/.ssh/id_rsa.pub root@S3
+    \end{verbatim}
+\subsection{配置NFS}
+    需要借助操作系统提供的共享文件系统NFS来在S1和S2,S3之间共享数据。首先在主机S1上建立NFS共享目录：
+    \begin{enumerate} 
+    \item  创建共享目录:
+            
+    \begin{verbatim}
+             mkdir /share
+    \end{verbatim}
+    \item  将目录添加到NFS目录中:
+    \begin{verbatim}
+            修改/etc/exports中添加/share *(sync,rw,no\_root\_squash)
+    \end{verbatim}
+    \item  开启NFS服务:
+    \begin{verbatim}
+            service nfs start
+    \end{verbatim}
+    \item  开启主机S1和S2的挂载目录:
+    \begin{verbatim}
+           mkdir /share;mount s1:/share /share;mkdir /share mount s1:share /share
+    \end{verbatim}
+    \end{enumerate}
+\subsection{安装MPICH2}
+    在主机S1,S2,S3上安装MPICH2
     \begin{enumerate}
-    \item 下载最新版本的mpich2.tar.gz,安装c编译器,准备好Linux操作系统
+    \item 下载最新版本的mpich2.tar.gz,安装c编译器
     \item 解压缩安装包tar zxvf mpich2.tar.gz 
     \item 开始安装
             \begin{enumerate}
@@ -163,6 +191,20 @@ MPI有6种状态，分别是标准，同步，就绪，缓存，阻塞和非阻�
             \end{enumerate}
     \item 测试本机到其他Linux服务器是否可以通过ssh无密码登录，可以使用ssh user@remotemachine来测试
     \end{enumerate}
+    在主机S1创建mpd.hosts文件并加入各个机器的机器名或者对应的ip地址即可
+
+\subsection{MPI环境测试}
+    启动MPICH2守护进程：
+    \begin{verbatim}
+mpdboot -n 1;
+    \end{verbatim}
+
+    执行
+    \begin{verbatim}
+mpdtrace -l，
+    \end{verbatim}
+
+执行成功后会得到主机名，监听端口号，主机ip地址。测试成功后mpdallexit退出守护进程。
 
 \subsection{MPI编程}
     MPI编程常见的策略为安装MPI的实现到PC机，进行小数据量测试后，确定程序运行正确之后，进行
